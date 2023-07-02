@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: recorder-ingress-{{ .UniqueName }}
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /vod/{{ .VideoId }}
+        pathType: Prefix
+        backend:
+          service:
+            name: recorder-svc-{{ .UniqueName }}
+            port:
+              number: 80

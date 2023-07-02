@@ -1,0 +1,11 @@
+apiVersion: core/v1
+kind: Service
+metadata:
+  name: recorder-svc-{{ .UniqueName }}
+spec:
+  selector:
+    {{ .VideoIdLabel }}: "{{ .VideoId }}"
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http

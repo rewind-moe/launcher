@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: recorder-{{ .UniqueName }}
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: success-in-30-seconds
+        image: busybox
+        args: ['/bin/sh', '-c', 'sleep 30']
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
